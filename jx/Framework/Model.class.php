@@ -1,16 +1,5 @@
 <?php
 
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
-/**
- * Description of Model
- *
- * @author admin
- */
 abstract class Model
 {
 
@@ -52,9 +41,22 @@ abstract class Model
         $tablePrefix = $GLOBALS['config']['DB']['prefix'];
         if (empty($this->tableName))
         {
-            $this->tableName = strtolower(strstr(get_class($this), 'Model', true));
+            $this->tableName = $this->parse_name(strstr(get_class($this), 'Model', true));
         }
         return $tablePrefix . $this->tableName;
+    }
+
+    public function parse_name($name, $type = 0)
+    {
+        if ($type)
+        {
+            return ucfirst(preg_replace_callback('/_([a-zA-Z])/', function($match) {
+                    return strtoupper($match[1]);
+                }, $name));
+        } else
+        {
+            return strtolower(trim(preg_replace("/[A-Z]/", "_\\0", $name), "_"));
+        }
     }
 
     public function getAll($condition = '')

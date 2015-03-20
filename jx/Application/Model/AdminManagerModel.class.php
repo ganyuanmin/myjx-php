@@ -1,45 +1,36 @@
 <?php
 
-class AdminManagerModel extends Model
+class AdminManagerModel extends CheckModel
 {
+
     public function save($adminManager)
     {
-        if(empty($adminManager['username']))
+        $condition = "username='{$adminManager['username']}'";
+        $result = $this->check($adminManager['username'], $condition);
+        if ($result)
         {
-            $this->errorInfo = '用户名不能为空';
-            return false;
+            return $this->insertData($adminManager);
         }
-        $count = $this->count("username = {$adminManager['username']}");
-        if($count>0)
-        {
-            $this->errorInfo = '用户名已经存在';
-            return false;
-        }
-        $adminManager['password'] = md5($adminManager['password']);
-        return $this->insertData($adminManager);
+        return $result;
     }
-    
+
     public function update($adminManager)
     {
-        
-        if (empty($adminManager['username']))
-        {
-            $this->errorInfo = '用户名不能为空';
-            return false;
-        }
-        $count = $this->count("username = {$adminManager['username']}");
-        if ($count > 0)
-        {
-            $this->errorInfo = '用户名已经存在';
-            return false;
-        }
+
         $adminManager['password'] = md5($adminManager['password']);
-        return $this->updateData($adminManager);
+        $condition = "username='{$adminManager['username']}' and password = '{$adminManager['password']}'";
+        $result = $this->check($adminManager['username'],$condition);
+        if ($result)
+        {
+            return $this->updateData($adminManager);
+        }
+        return $result;
     }
-    
+
     public function checkLogin($user)
     {
-        $sql = "select * from jx_adminmanager where username='{$user['username']}' and  password=md5('{$user['password']}')";
+        $sql = "select * from jx_admin_manager where username='{$user['username']}' and  password=md5('{$user['password']}')";
         return $this->db->fetchRow($sql);
     }
+
 }

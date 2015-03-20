@@ -10,31 +10,51 @@
 </head>
 <body>
 <h1>
-    <span class="action-span"><a href="index.php?p=Admin&c=Supply&a=index">供应商列表</a></span>
+    <span class="action-span"><a href="brandList.html">商品品牌</a></span>
     <span class="action-span1"><a href="#">ECSHOP 管理中心</a></span>
     <span id="search_id" class="action-span1"> - 添加品牌 </span>
     <div style="clear:both"></div>
 </h1>
 <div class="main-div">
-    <form method="post" action="index.php?p=Admin&c=Supply&a=save" enctype="multipart/form-data" >
+    <form method="post" action="index.php?p=Admin&c=Brand&a=save" enctype="multipart/form-data" >
         <table cellspacing="1" cellpadding="3" width="100%">
             <tr>
-                <td class="label">供应商名称:</td>
+                <td class="label">品牌名称</td>
                 <td>
                     <input type="text" name="name" maxlength="60" value="<?php echo isset($name)?$name:'';?>" />
+                    <span class="require-field">*</span>
                 </td>
             </tr>
             <tr>
-                <td class="label">供应商简介:</td>
+                <td class="label">品牌网址</td>
+                <td>
+                    <input type="text" name="url" maxlength="60" size="40" value="<?php echo isset($url)?$url:'';?>" />
+                </td>
+            </tr>
+            <tr>
+                <td class="label">品牌LOGO</td>
+                <td>
+                    <input type="file" name="logo" id="logo" size="45"><br/>
+                    <span class="notice-span" style="display:block"  id="warn_brandlogo">请上传图片，做为品牌的LOGO！</span>
+                </td>
+            </tr>
+            <tr>
+                <td class="label">品牌描述</td>
                 <td>
                     <textarea  name="intro" cols="60" rows="4"  ><?php echo isset($intro)?$intro:'';?></textarea>
                 </td>
             </tr>
             <tr>
-                <td class="label">供应商状态</td>
+                <td class="label">排序</td>
                 <td>
-                    <input type="radio" name="status" value="1" <?php if(isset($status)){if($status==1) echo 'checked';}?> /> 是
-                    <input type="radio" name="status" value="0"  <?php if(isset($status)){if($status==0) echo 'checked';}?>/> 否
+                    <input type="text" name="sort" maxlength="40" size="15" value="<?php echo isset($sort)?$sort:'';?>" />
+                </td>
+            </tr>
+            <tr>
+                <td class="label">是否显示</td>
+                <td>
+                    <input type="radio" name="is_show" value="1" <?php if(isset($is_show)){if($is_show==1) echo 'checked';}?> /> 是
+                    <input type="radio" name="is_show" value="0"  <?php if(isset($is_show)){if($is_show==0) echo 'checked';}?>/> 否(当品牌下还没有商品的时候，首页及分类页的品牌区将不会显示该品牌。)
                 </td>
             </tr>
             <tr>

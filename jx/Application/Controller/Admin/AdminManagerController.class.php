@@ -10,7 +10,7 @@ class AdminManagerController extends Controller
     public function checkLoginAction()
     {
         new SessionDBTool();
-        if($_POST['captcha']!=$_SESSION['randomString'])
+        if(isset($_POST['captcha'])&&CaptchaTool::check($_POST['captcha']))
         {
             $this->redirect('index.php?p=Admin&c=AdminManager&a=login','验证码错误',2);
         }
@@ -68,7 +68,7 @@ class AdminManagerController extends Controller
         $this->redirect('index.php?p=Admin&c=AdminManager&a=index');
     }
     
-    public function remove()
+    public function removeAction()
     {
         $id = $_GET['id'];
         $adminManagerModel = new AdminManagerModel();

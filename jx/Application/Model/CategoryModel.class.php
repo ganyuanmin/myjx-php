@@ -1,6 +1,6 @@
 <?php
 
-class CategoryModel extends Model
+class CategoryModel extends CheckModel
 {
 
     public function getList()
@@ -39,21 +39,12 @@ class CategoryModel extends Model
     {
         $rows = $this->getAll();
         $name = trim($category['name']);
-        if (empty($name))
+        $result = $this->check($category['name']);
+        if ($result)
         {
-            $this->errorInfo = '用户名不能为空';
-            return false;
+            return $this->insertData($category);
         }
-        $parents = $this->getTree($rows, $category['parent_id']);
-        foreach ($parents as $parent)
-        {
-            if ($parent['name'] == $category['name'])
-            {
-                $this->errorInfo = "商品名已存在";
-                return false;
-            }
-        }
-        return $this->insertData($category);
+        return $result;
     }
 
     public function update($category)
@@ -84,7 +75,7 @@ class CategoryModel extends Model
                 return false;
             }
         }
-        return $this->insertData($category);
+        return $this->updateData($category);
     }
 
 }

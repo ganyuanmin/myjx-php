@@ -40,6 +40,17 @@
                         <input type="text" name="email" value="<?php echo isset($email)?$email:'';?>" size="20"/>
                     </td>
                 </tr>
+                <tr>
+                    <td class="label">会员等级：</td>
+                    <td>
+                        <select name="userrank_id">
+                            <option value="0">请选择</option>
+                            <?php foreach($userranks as $userrank):?>
+                            <option value="<?php echo $userrank['id'];?>" <?php if(isset($userrank_id)&&$userrank_id==$userrank['id']) echo 'selected'; ?>><?php echo $userrank['name'];?></option>
+                            <?php endForeach;?>
+                        </select>
+                    </td>
+                </tr>
  
                 <tr>
                     <td class="label">可用资金：</td>

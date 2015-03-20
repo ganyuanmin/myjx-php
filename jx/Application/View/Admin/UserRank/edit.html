@@ -10,31 +10,52 @@
 </head>
 <body>
 <h1>
-    <span class="action-span"><a href="index.php?p=Admin&c=Supply&a=index">供应商列表</a></span>
+    <span class="action-span"><a href="brandList.html">商品品牌</a></span>
     <span class="action-span1"><a href="#">ECSHOP 管理中心</a></span>
     <span id="search_id" class="action-span1"> - 添加品牌 </span>
     <div style="clear:both"></div>
 </h1>
 <div class="main-div">
-    <form method="post" action="index.php?p=Admin&c=Supply&a=save" enctype="multipart/form-data" >
+    <form method="post" action="index.php?p=Admin&c=Userrank&a=save" enctype="multipart/form-data" >
         <table cellspacing="1" cellpadding="3" width="100%">
             <tr>
-                <td class="label">供应商名称:</td>
+                <td class="label">会员等级名称</td>
                 <td>
                     <input type="text" name="name" maxlength="60" value="<?php echo isset($name)?$name:'';?>" />
+                    <span class="require-field">*</span>
                 </td>
             </tr>
             <tr>
-                <td class="label">供应商简介:</td>
+                <td class="label">积分下限</td>
                 <td>
-                    <textarea  name="intro" cols="60" rows="4"  ><?php echo isset($intro)?$intro:'';?></textarea>
+                    <input type="text" name="min_points" maxlength="60" value="<?php echo isset($min_points)?$min_points:'';?>" />
+                    <span class="require-field">*</span>
                 </td>
             </tr>
             <tr>
-                <td class="label">供应商状态</td>
+                <td class="label">积分上限</td>
                 <td>
-                    <input type="radio" name="status" value="1" <?php if(isset($status)){if($status==1) echo 'checked';}?> /> 是
-                    <input type="radio" name="status" value="0"  <?php if(isset($status)){if($status==0) echo 'checked';}?>/> 否
+                    <input type="text" name="name" maxlength="60" value="<?php echo isset($name)?$name:'';?>" />
+                    <span class="require-field">*</span>
+                </td>
+            </tr>
+            <tr>
+                <td class="label">初始折扣率</td>
+                <td>
+                    <input type="text" name="max_points" maxlength="60" value="<?php echo isset($max_points)?$max_points:'';?>" />
+                    <span class="require-field">*</span>
+                </td>
+            </tr>
+            <tr>
+                <td class="label">特殊会员组</td>
+                <td>
+                    <input type="checkbox" name="special_rank"  value="1" <?php if(isset($special_rank)) echo 'checked';?> /> 是
+                </td>
+            </tr>
+            <tr>
+                <td class="label">显示价格</td>
+                <td>
+                    <input type="checkbox" name="show_price" value="1" <?php if(isset($show_price)) echo 'checked';?> /> 是
                 </td>
             </tr>
             <tr>

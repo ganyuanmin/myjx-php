@@ -53,7 +53,7 @@ var captcha_empty = "您没有输入验证码!";
       <a href="privilege.php?act=allot&id=3&user=shhaigonghuo1" title="分派权限"><img src="Public/Admin/images/icon_priv.gif" border="0" height="16" width="16"></a>&nbsp;&nbsp;
       <a href="admin_logs.php?act=list&id=3" title="查看日志"><img src="Public/Admin/images/icon_view.gif" border="0" height="16" width="16"></a>&nbsp;&nbsp;
       <a href="index.php?p=Admin&c=AdminManager&a=edit&id=<?php echo $row['id'];?>" title="编辑"><img src="Public/Admin/images/icon_edit.gif" border="0" height="16" width="16"></a>&nbsp;&nbsp;
-      <a href="javascript:;" onclick="listTable.remove(3, '您确认要删除这条记录吗?')" title="移除"><img src="Public/Admin/images/icon_drop.gif" border="0" height="16" width="16"></a></td>
+      <a href="index.php?p=Admin&c=AdminManager&a=remove&id=<?php echo $row['id'];?>" title="移除"><img src="Public/Admin/images/icon_drop.gif" border="0" height="16" width="16"></a></td>
   </tr>
   <?php endForeach;?> 
   </table>

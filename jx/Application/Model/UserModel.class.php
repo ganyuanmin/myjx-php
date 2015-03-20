@@ -1,40 +1,26 @@
 <?php
 
-class UserModel extends Model
+class UserModel extends CheckModel
 {
 
     public function save($user)
     {
-        $name = $user['name'];
-        if (empty($name))
+        $result = $this->check($user['name']);
+        if($result)
         {
-            $this->errorInfo = '用户名不能为空';
-            return false;
+            return $this->insertData($user);
         }
-        $count = $this->count("name = $name");
-        if ($count > 0)
-        {
-            $this->errorInfo = '用户名已存在';
-            return false;
-        }
-        return $this->insertData($user);
+        return $result;
     }
 
     public function update($user)
     {
-        $name = $user['name'];
-        if (empty($name))
+        $result = $this->check($user['name']);
+        if($result)
         {
-            $this->errorInfo = '用户名不能为空';
-            return false;
+            return $this->updateData($user);
         }
-        $count = $this->count("name = $name");
-        if ($count > 0)
-        {
-            $this->errorInfo = '用户名已存在';
-            return false;
-        }
-        return $this->updateData($user);
+        return $result;
     }
 
 }

@@ -1,40 +1,27 @@
 <?php
 
-class BrandModel extends Model
+class BrandModel extends CheckModel
 {
 
     public function save($brand)
     {
-        $name = trim($brand['name']);
-        if (empty($name))
+        $result = $this->check($brand['name']);
+        if ($result)
         {
-            $this->errorInfo = '用户名不能为空';
-            return false;
+            return $this->insertData($brand);
         }
-        $count = $this->count("name={$brand['name']}");
-        if ($count != 0)
-        {
-            $this->errorInfo = '用户名已存在';
-            return false;
-        }
-        return $this->insertData($brand);
+        return $result;
     }
 
     public function update($brand)
     {
-        $name = trim($brand['name']);
-        if (empty($name))
+        $condition = "name={$brand['name']} and id<>{$brand['id']}";
+        $result = $this->check($brand['name'],$condition);
+        if ($result)
         {
-            $this->errorInfo = '用户名不能为空';
-            return false;
+            return $this->updateData($brand);
         }
-        $count = $this->count("name={$brand['name']} and id<>{$brand['id']}");
-        if ($count != 0)
-        {
-            $this->errorInfo = '用户名已存在';
-            return false;
-        }
-        return $this->updateData($brand);
+        return $result;
     }
 
 }

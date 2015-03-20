@@ -36,9 +36,8 @@ class BrandController extends Controller
     {
         $brand = $_POST;
         $brandModel = new BrandModel();
-        if(!empty($_FILES['logo']))
+        if($_FILES['logo']==UPLOAD_ERR_OK)
         {
-            var_dump($GLOBALS['config']['Allow_types']);
             $uploadTool = new UploadTool($GLOBALS['config']['Allow_types']);
             $logoPath = $uploadTool->uploadOne($_FILES['logo'], 'brand');
             if(!$logoPath)

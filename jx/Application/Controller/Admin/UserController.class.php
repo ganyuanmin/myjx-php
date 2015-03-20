@@ -23,12 +23,15 @@ class UserController extends Controller
 
     public function editAction()
     {
+        $userrankModel = new UserrankModel();
+        $userrank = $userrankModel->getAll();
         $userModel = new UserModel();
         if (isset($_GET['id']))
         {
             $row = $userModel->getByPK($_GET['id']);
             $this->assign($row);
         }
+        $this->assign('userranks',$userrank);
         $this->display('edit.html');
     }
 
